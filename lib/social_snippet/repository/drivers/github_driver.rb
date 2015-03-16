@@ -19,12 +19,34 @@ module SocialSnippet::Repository::Drivers
     end
 
     def refs
-      api_client.refs("#{github_owner}/#{github_repo}")
-        .map {|info| info[:ref] }
-        .map {|ref| ref.gsub /^refs\/[a-z]+\//, "" }
+      refs_api.map {|info| info[:ref].gsub /^refs\/[a-z]+\//, "" }
+    end
+
+    def rev_hash(ref)
+      rev_hash_map[ref]
     end
 
     private
+
+    def rev_hash_map
+      @rev_hash_map = refs_api.inject(::Hash.new) do |hash, info|
+        ref = info[:ref].gsub(/^refs\/[a-z]+\//, "")
+        hash[ref] = info[:object][:sha]
+        hash
+      end
+    end
+
+    def refs_api
+      @refs_api ||= api_client.refs("#{github_owner}/#{github_repo}")
+    end
+
+    def repo
+      api_client.repo(repo_name)
+    end
+
+    def repo_name
+      "#{github_owner}/#{github_repo}"
+    end
 
     def parse_github_owner
       /^\/(.+)\/.+/.match(::URI.parse(url).path)[1]
