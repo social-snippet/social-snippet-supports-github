@@ -18,7 +18,7 @@ deploy:
   provider: rubygems
   api_key:
     master:
-      secure: "oqPMtM+zx2vMHKn7T3KoJ2g8pn/xL9vv2mCTTbSjElbiQM7btOqPACrsB8nLVu+joEObGbzE1u2uds2+j2JhuGeFxYQ6oHsFdqOESsRktJTdhO7JE7Y+huMYqJpE8yzulJ137RrQBESrvJF5au7wAcVE5CZMJnZJUuI0lngdTgE="
+      secure: "IglhEWHd45IzaY7aCjIZz5LOU3IxzpJFerRfgTwKRZYLARjgtkkzARbAJ1PsnurtMdYA+aMHUiGPSgclMb+gLSXGjD1e+mx6cY0b7k4r7c8heFdKbnHIaC438fKqlqCew8oDsL1MACJO+2sZZClktnFRJnlVyQUxOaPQ0SmDzMQ="
   gem:
     master: social_snippet-supports-github
   on:
