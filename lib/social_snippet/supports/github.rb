@@ -1,4 +1,5 @@
 require "social_snippet/supports/github/version"
+require "social_snippet/repository/drivers/github_driver"
 
 module SocialSnippet
   module Supports
