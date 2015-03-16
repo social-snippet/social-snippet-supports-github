@@ -1,0 +1,31 @@
+language: ruby
+
+rvm:
+  - "2.2"
+  - "2.1"
+  - "2.0"
+  - "1.9"
+
+sudo: false
+
+install:
+  - bundle install -j4 --path vendor/bundle
+
+script:
+  - bundle exec rake spec
+
+deploy:
+  provider: rubygems
+  api_key:
+    master:
+      secure: "oqPMtM+zx2vMHKn7T3KoJ2g8pn/xL9vv2mCTTbSjElbiQM7btOqPACrsB8nLVu+joEObGbzE1u2uds2+j2JhuGeFxYQ6oHsFdqOESsRktJTdhO7JE7Y+huMYqJpE8yzulJ137RrQBESrvJF5au7wAcVE5CZMJnZJUuI0lngdTgE="
+  gem:
+    master: social_snippet-supports-github
+  on:
+    repo: social-snippet/social-snippet-supports-github
+    ruby: "2.2"
+
+cache:
+  directories:
+    - vendor/bundle
+
