@@ -14,7 +14,7 @@ module SocialSnippet::Repository::Drivers
       @github_repo = parse_github_repo
       @api_client = ::Octokit::Client.new(
         :client_id => GITHUB_CLIENT_ID,
-        :client_id => GITHUB_CLIENT_SECRET,
+        :client_secret => GITHUB_CLIENT_SECRET,
       )
     end
 
