@@ -56,7 +56,7 @@ module SocialSnippet::Repository::Drivers
       tree(ref).select do |item|
         item.type === "blob"
       end.map do |item|
-        ::SocialSnippet::Repository::Drivers::Entry.new item.path, blob(item.sha)
+        Entry.new item.path, blob(item.sha)
       end
     end
 
@@ -73,7 +73,7 @@ module SocialSnippet::Repository::Drivers
       tree(ref).select do |item|
         item.type === "tree"
       end.map do |item|
-        ::SocialSnippet::Repository::Drivers::Entry.new item.path, nil
+        Entry.new item.path, nil
       end
     end
 
