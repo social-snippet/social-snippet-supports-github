@@ -34,6 +34,26 @@ module SocialSnippet::Repository::Drivers
       directories(ref).each &block
     end
 
+    class << self
+
+      def target_url?(url)
+        uri = ::URI.parse(url)
+        is_github_url?(uri)
+      end
+
+      def is_github_url?(uri)
+        /^git$|^https?$/ === uri.scheme &&
+        /^github.com$/ === uri.host &&
+        /^.*\/.*$/ === uri.path
+      end
+
+      # Disable directory path
+      def target_path?(path)
+        false
+      end
+
+    end
+
     private
 
     def rev_hash_map
