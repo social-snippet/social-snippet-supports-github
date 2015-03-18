@@ -18,6 +18,10 @@ module SocialSnippet::Repository::Drivers
       )
     end
 
+    def snippet_json(ref = "master")
+      ::JSON.parse file(ref, "snippet.json")
+    end
+
     def refs
       refs_api.map {|info| info[:ref].gsub /^refs\/[a-z]+\//, "" }
     end
@@ -78,6 +82,11 @@ module SocialSnippet::Repository::Drivers
       end.map do |item|
         Entry.new item.path, blob(item.sha)
       end
+    end
+
+    def file(ref, path)
+      res = api_client.contents(repo_name, :ref => ref, :path => path)
+      ::Base64.decode64 res.content
     end
 
     def blob(hash)
