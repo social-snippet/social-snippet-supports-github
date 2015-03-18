@@ -14,6 +14,12 @@ install:
 script:
   - bundle exec rake spec
 
+  # test shell access
+  - bundle exec ./test/bin/sspm_github install example-repo#1.0.0
+  - echo "// @snip <example-repo:func.cpp>" | bundle exec ssnip
+  - bundle exec ./test/bin/sspm_github update
+  - echo "// @snip <example-repo:func.cpp>" | bundle exec ssnip
+
 deploy:
   provider: rubygems
   api_key:
