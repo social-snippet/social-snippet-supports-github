@@ -9,10 +9,16 @@ rvm:
 sudo: false
 
 install:
-  - bundle install -j4 --path vendor/bundle
+  - travis_retry bundle install -j4 --path vendor/bundle
 
 script:
   - bundle exec rake spec
+
+  # test shell access
+  - bundle exec ./test/bin/sspm_github install example-repo#1.0.0
+  - echo "// @snip <example-repo:func.cpp>" | bundle exec ssnip
+  - bundle exec ./test/bin/sspm_github update
+  - echo "// @snip <example-repo:func.cpp>" | bundle exec ssnip
 
 deploy:
   provider: rubygems
